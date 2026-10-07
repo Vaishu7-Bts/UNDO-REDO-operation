@@ -1,0 +1,176 @@
+# Undo/Redo System using Stack
+
+undo_stack = []
+redo_stack = []
+
+document = ""
+
+while True:
+    print("\n--- Text Editor ---")
+    print("1. Make a new change")
+    print("2. Undo")
+    print("3. Redo")
+    print("4. Display current document")
+    print("5. Exit")
+ \\real time undo-redo operation
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        change = input("Enter text to add: ")
+
+        # Store current state in Undo stack
+        undo_stack.append(document)
+
+        # Add new text
+        document += change
+
+        # Clear Redo stack after a new change
+        redo_stack.clear()
+
+        print("Change added successfully.")
+
+    elif choice == "2":
+        if not undo_stack:
+            print("Nothing to undo.")
+        else:
+            # Store current state in Redo stack
+            redo_stack.append(document)
+
+            # Restore previous state
+            document = undo_stack.pop()
+
+            print("Undo successful.")
+
+    elif choice == "3":
+        if not redo_stack:
+            print("Nothing to redo.")
+        else:
+            # Store current state in Undo stack
+            undo_stack.append(document)
+
+            # Restore undone state
+            document = redo_stack.pop()
+
+            print("Redo successful.")
+
+    elif choice == "4":
+        print("Current document:", document)
+
+    elif choice == "5":
+        print("Exiting Text Editor.")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
+
+output:
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 1
+Enter text to add: Hello
+Change added successfully.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 1
+Enter text to add: World
+Change added successfully.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 4
+Current document: HelloWorld
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 2
+Undo successful.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 4
+Current document: Hello
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 3
+Redo successful.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 4
+Current document: HelloWorld
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 2
+Undo successful.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 2
+Undo successful.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 2
+Nothing to undo.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 3
+Redo successful.
+
+--- Text Editor ---
+1. Make a new change
+2. Undo
+3. Redo
+4. Display current document
+5. Exit
+Enter your choice: 5
+Exiting Text Editor.
+
